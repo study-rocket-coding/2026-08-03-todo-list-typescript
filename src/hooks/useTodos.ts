@@ -1,19 +1,20 @@
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
-import { getTodos, postTodo, deleteTodo, toggleStatus, putTodo } from "../apis";
-import { todoKeys } from "../constants/queryKeys"
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { getTodos, postTodo, deleteTodo, toggleStatus, putTodo } from '../apis';
+import { todoKeys } from '../constants/queryKeys';
 
 const getErrorMessage = (error) =>
-  error ? (error.response?.data?.message || "發生錯誤，請稍後再試") : '';
+  error ? error.response?.data?.message || '發生錯誤，請稍後再試' : '';
 
-const errorMessage = "發生錯誤，請稍後再試";
+const errorMessage = '發生錯誤，請稍後再試';
 export function useTodos() {
   const queryClient = useQueryClient();
-  const invalidateTodos = () => queryClient.invalidateQueries({ queryKey: todoKeys.all });
+  const invalidateTodos = () =>
+    queryClient.invalidateQueries({ queryKey: todoKeys.all });
 
   const todos = useQuery({
     queryKey: todoKeys.all,
     queryFn: async ({ signal }) => getTodos({ signal }),
-  })
+  });
 
   const addTodoMutation = useMutation({
     mutationFn: postTodo,
@@ -31,16 +32,17 @@ export function useTodos() {
   });
 
   const editTodoMutation = useMutation({
-    mutationFn: ({id, content}) => putTodo(id, content),
+    mutationFn: ({ id, content }) => putTodo(id, content),
     onSettled: invalidateTodos,
   });
 
   const clearCompletedMutation = useMutation({
-    mutationFn: () => Promise.all(
-      (todos.data ?? [])
-        .filter((todo) => todo.status)
-        .map((todo) => deleteTodo(todo.id))
-    ),
+    mutationFn: () =>
+      Promise.all(
+        (todos.data ?? [])
+          .filter((todo) => todo.status)
+          .map((todo) => deleteTodo(todo.id)),
+      ),
     onSettled: invalidateTodos,
   });
 
@@ -51,7 +53,9 @@ export function useTodos() {
     toggleTodoMutation.error,
     editTodoMutation.error,
     clearCompletedMutation.error,
-  ].filter(Boolean).map(getErrorMessage);
+  ]
+    .filter(Boolean)
+    .map(getErrorMessage);
 
   return {
     todos: todos.data ?? [],
@@ -62,6 +66,6 @@ export function useTodos() {
     removeTodo: removeTodoMutation.mutate,
     toggleTodo: toggleTodoMutation.mutate,
     editTodo: editTodoMutation.mutate,
-    clearCompleted: clearCompletedMutation.mutate
+    clearCompleted: clearCompletedMutation.mutate,
   };
 }
