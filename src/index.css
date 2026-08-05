@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  /* 色票 */
+  --color-brand-100: oklch(96% 0.03 160);
+  --color-brand-200: oklch(91% 0.05 160);
+  --color-brand-300: oklch(84% 0.07 160);
+  --color-brand-400: oklch(73% 0.09 160);
+  --color-brand-500: oklch(59% 0.12 160);
+  --color-brand-600: oklch(47% 0.13 160);
+  --color-brand-700: oklch(41% 0.13 160);
+  --color-brand-800: oklch(36% 0.12 160);
+  --color-brand-900: oklch(29% 0.11 160);
+  --color-brand-1000: oklch(19% 0.08 160);
+
+  /* 字體 */
+  --font-brand-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-brand-mono: "Roboto Mono", ui-monospace, monospace;
+
+  /* 字級 */
+  --text-caption: 0.8125rem;   /* 13px */
+  --text-label: 0.875rem;      /* 14px */
+  --text-subtitle: 0.9375rem;  /* 15px */
+  --text-body: 1rem;           /* 16px */
+  --text-display: 1.375rem;    /* 22px */
+  --text-heading: 1.5rem;      /* 24px */
+
+  /* 間距 */
+  --spacing-section-gap: 1.125rem; /* 18px */
+  --spacing-card-y: 1.125rem;      /* 18px */
+  --spacing-card-x: 1.375rem;      /* 22px - 卡片內距 */
+  --spacing-icon-md: 1.375rem;     /* 22px - Aside 行程指示圖示尺寸 */
+  --spacing-control-h: 3.125rem;   /* 50px - 主要按鈕高度 */
+  --spacing-form-min: 18.75rem;    /* 300px - 登入/註冊表單欄位最小寬 */
+  --spacing-card-max: 51.25rem;    /* 820px - 登入/註冊卡片最大寬 */
+
+  /* 陰影 */
+  --shadow-card: 0 2px 14px 0 rgb(0 0 0 / 0.07); /* Todo 清單卡片陰影 */
+
+  /* 圓角 */
+  --radius-indicator: 0.25rem; /* 4px  - Aside 行程指示小方塊 */
+  --radius-control: 0.5rem;    /* 8px  - 按鈕、輸入框、小卡片 */
+  --radius-card: 1rem;         /* 16px - 大卡片（登入/註冊卡、進度卡、Todo 清單卡） */
+  --radius-pill: 9999px;       /* pill - 主按鈕、進度條、打勾圖示 */
+}
+
+body {
+  font-family: var(--font-brand-sans);
+}
