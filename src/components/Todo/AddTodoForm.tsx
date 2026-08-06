@@ -1,17 +1,21 @@
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 
-function AddTodoForm({ onAdd, isAdding }) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-    watch,
-  } = useForm();
+type AddTodoFormValues = {
+  content: string;
+};
+
+type AddTodoFormProps = {
+  onAdd: (content: string, options?: { onSuccess?: () => void }) => void;
+  isAdding: boolean;
+};
+
+function AddTodoForm({ onAdd, isAdding }: AddTodoFormProps) {
+  const { register, handleSubmit, reset, watch } =
+    useForm<AddTodoFormValues>();
 
   const content = watch('content');
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<AddTodoFormValues> = (data) => {
     onAdd(data.content, { onSuccess: () => reset() });
   };
 
