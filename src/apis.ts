@@ -1,4 +1,11 @@
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
+import type {
+  SignUpBody,
+  SignUpResponse,
+  SignInBody,
+  SignInResponse,
+  Todo,
+} from './types/todo';
 
 const baseUrl = 'https://todolist-api.hexschool.io';
 
@@ -19,72 +26,36 @@ axios.interceptors.response.use(
   },
 );
 
-export async function signUp(signUpEmail, signUpPwd, nickName) {
-  try {
-    const { data } = await axios.post(`${baseUrl}/users/sign_up`, {
-      email: signUpEmail,
-      password: signUpPwd,
-      nickname: nickName,
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
+export async function signUp(body: SignUpBody): Promise<SignUpResponse> {
+  const { data } = await axios.post(`${baseUrl}/users/sign_up`, body);
+  return data;
 }
 
-export async function signIn(signInEmail, signInPwd) {
-  try {
-    const { data } = await axios.post(`${baseUrl}/users/sign_in`, {
-      email: signInEmail,
-      password: signInPwd,
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
+export async function signIn(body: SignInBody): Promise<SignInResponse> {
+  const { data } = await axios.post(`${baseUrl}/users/sign_in`, body);
+  return data;
 }
 
-export async function getTodos(config) {
-  try {
-    const { data } = await axios.get(`${baseUrl}/todos/`, {
-      ...config,
-    });
-
-    return data.data;
-  } catch (error) {
-    throw error;
-  }
+export async function getTodos(config: AxiosRequestConfig): Promise<Todo[]> {
+  const { data } = await axios.get(`${baseUrl}/todos/`, {
+    ...config,
+  });
+  return data.data;
 }
 
-export async function postTodo(content) {
-  try {
-    const { data } = await axios.post(`${baseUrl}/todos/`, { content });
-    return data.newTodo;
-  } catch (error) {
-    throw error;
-  }
+export async function postTodo(content: string): Promise<Todo> {
+  const { data } = await axios.post(`${baseUrl}/todos/`, { content });
+  return data.newTodo;
 }
 
-export async function deleteTodo(id) {
-  try {
-    const { data } = await axios.delete(`${baseUrl}/todos/${id}`);
-  } catch (error) {
-    throw error;
-  }
+export async function deleteTodo(id: string): Promise<void> {
+  await axios.delete(`${baseUrl}/todos/${id}`);
 }
 
-export async function toggleStatus(id) {
-  try {
-    const { data } = await axios.patch(`${baseUrl}/todos/${id}/toggle`);
-  } catch (error) {
-    throw error;
-  }
+export async function toggleStatus(id: string): Promise<void> {
+  await axios.patch(`${baseUrl}/todos/${id}/toggle`);
 }
 
-export async function putTodo(id, content) {
-  try {
-    const { data } = await axios.put(`${baseUrl}/todos/${id}`, { content });
-  } catch (error) {
-    throw error;
-  }
+export async function putTodo(id: string, content: string): Promise<void> {
+  await axios.put(`${baseUrl}/todos/${id}`, { content });
 }
