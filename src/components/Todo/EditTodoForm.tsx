@@ -1,7 +1,16 @@
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 
-function EditTodoForm({ content, onSubmit }) {
-  const { register, handleSubmit } = useForm();
+type EditTodoFormValues = {
+  newContent: string;
+};
+
+type EditTodoFormProps = {
+  content: string;
+  onSubmit: SubmitHandler<EditTodoFormValues>;
+};
+
+function EditTodoForm({ content, onSubmit }: EditTodoFormProps) {
+  const { register, handleSubmit } = useForm<EditTodoFormValues>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
