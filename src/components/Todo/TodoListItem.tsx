@@ -1,11 +1,31 @@
 import { useState } from 'react';
 import EditTodoForm from './EditTodoForm';
 import DisplayTodo from './DisplayTodo';
+import type { EditTodoPayload } from '../../types/todo';
 
-function TodoListItem({ id, status, content, onDelete, onToggle, onEdit }) {
+type TodoListItemProps = {
+  id: string;
+  status: boolean;
+  content: string;
+  onDelete: (id: string) => void;
+  onToggle: (id: string) => void;
+  onEdit: (
+    payload: EditTodoPayload,
+    options?: { onSuccess?: () => void },
+  ) => void;
+};
+
+function TodoListItem({
+  id,
+  status,
+  content,
+  onDelete,
+  onToggle,
+  onEdit,
+}: TodoListItemProps) {
   const [isEditing, setIsEditing] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: { newContent: string }) => {
     onEdit(
       { id, content: data.newContent },
       { onSuccess: () => setIsEditing(false) },
