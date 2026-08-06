@@ -1,4 +1,11 @@
-export const filterTabs = [
+import type { Filter } from '../../types/todo';
+
+type FilterTab = {
+  name: string;
+  dataTab: Filter;
+};
+
+export const filterTabs: FilterTab[] = [
   {
     name: '全部',
     dataTab: 'all',
