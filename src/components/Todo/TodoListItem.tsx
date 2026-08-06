@@ -23,7 +23,7 @@ function TodoListItem({
   onToggle,
   onEdit,
 }: TodoListItemProps) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const onSubmit = (data: { newContent: string }) => {
     onEdit(
