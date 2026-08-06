@@ -29,3 +29,13 @@ export type SignInResponse = {
   token: string;
   nickname: string;
 };
+
+export type ApiErrorResponse = {
+  status: boolean;
+  message: string;
+};
+
+export type EditTodoPayload = {
+  id: string;
+  content: string;
+};
