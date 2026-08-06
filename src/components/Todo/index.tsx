@@ -5,9 +5,10 @@ import { filterTabs } from './data';
 import FilterTodoBtn from './FilterBtn';
 import TodoListItem from './TodoListItem';
 import { useTodos } from '../../hooks/useTodos';
+import type { Filter } from '../../types/todo';
 
 function Todolist() {
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState<Filter>('all');
 
   const {
     todos,

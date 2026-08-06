@@ -1,4 +1,18 @@
-function FilterTodoBtn({ name, dataTab, isSelected, onFilter }) {
+import type { Filter } from '../../types/todo';
+
+type FilterTodoBtnProps = {
+  name: string;
+  dataTab: Filter;
+  isSelected: boolean;
+  onFilter: (dataTab: Filter) => void;
+};
+
+function FilterTodoBtn({
+  name,
+  dataTab,
+  isSelected,
+  onFilter,
+}: FilterTodoBtnProps) {
   return (
     <button
       type="button"
