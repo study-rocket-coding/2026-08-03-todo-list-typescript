@@ -5,7 +5,7 @@ type AddTodoFormValues = {
 };
 
 type AddTodoFormProps = {
-  onAdd: (content: string, options?: { onSuccess?: () => void }) => void;
+  onAdd: (content: string, options: { onSuccess: () => void }) => void;
   isAdding: boolean;
 };
 

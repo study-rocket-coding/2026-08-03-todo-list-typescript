@@ -11,7 +11,7 @@ type TodoListItemProps = {
   onToggle: (id: string) => void;
   onEdit: (
     payload: EditTodoPayload,
-    options?: { onSuccess?: () => void },
+    options: { onSuccess: () => void },
   ) => void;
 };
 
